@@ -10,31 +10,17 @@ public class enemyShoot : MonoBehaviour
     private float shotTarget;
     public GameObject enemBullet;
     public Transform shotPoint;
-    private bool canFire = true;
-    private bool runRoutine = false;
     // Start is called before the first frame update
     void Start()
     {
         curHealth = maxHealth;
-        canFire = true;
-        runRoutine = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canFire == true && runRoutine == false)
-        {
-            shoot(20);
-            StartCoroutine(bulletDelay(0.5f));
-        }
-        else
-        {
-            runRoutine = true;
-            canFire = false;
-            StartCoroutine(bulletDelay(0.5f));
-        }
-        
+        StartCoroutine(bulletDelay(0.5f));
+
     }
     public void takeHit(float damage)
     {
@@ -53,7 +39,6 @@ public class enemyShoot : MonoBehaviour
     private IEnumerator bulletDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        canFire = true;
-        runRoutine = false;
+        shoot(20);
     }
 }
