@@ -28,7 +28,11 @@ public class bullet : MonoBehaviour
         Destroy(gameObject);
         GameObject effect = Instantiate(destroyEffect, transform);
         Destroy(effect);
-
+        enemyRushMove rushEnem = collision.GetComponent<enemyRushMove>();
+        if(rushEnem != null)
+        {
+            rushEnem.takeHit(damage);
+        }
     }
 
 }
