@@ -33,6 +33,7 @@ public class bullet : MonoBehaviour
         {
             rushEnem.takeHit(damage);
         }
+
     }
 
 }
