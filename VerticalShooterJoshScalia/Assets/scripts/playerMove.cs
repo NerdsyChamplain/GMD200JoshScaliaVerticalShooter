@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class playerMove : MonoBehaviour
 {
@@ -10,11 +13,20 @@ public class playerMove : MonoBehaviour
     Vector2 move;
     Vector2 mousePos;
     public float speed = 2.5f;
+    private float curHealth, maxHealth, adjHealth;
+    public sceneManager sceneSwitcher;
+    public Image healthBar;
+    public TextMeshProUGUI healthNum;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
+        maxHealth = 8;
+        curHealth = maxHealth;
+
     }
 
     // Update is called once per frame
@@ -22,7 +34,9 @@ public class playerMove : MonoBehaviour
     {
         MoveInp();
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-
+        healthBar.fillAmount = curHealth / 10;
+        adjHealth = curHealth / 2;
+        healthNum.text = "Health: " + adjHealth.ToString();
     }
     private void FixedUpdate()
     {
@@ -37,5 +51,13 @@ public class playerMove : MonoBehaviour
         move.x = Input.GetAxisRaw("Horizontal");
         move.y = Input.GetAxisRaw("Vertical");
 
+    }
+    public void healthAdj(float damage)
+    {
+        curHealth -= damage;
+        if(curHealth <= 0)
+        {
+            sceneSwitcher.deathScene();
+        }
     }
 }

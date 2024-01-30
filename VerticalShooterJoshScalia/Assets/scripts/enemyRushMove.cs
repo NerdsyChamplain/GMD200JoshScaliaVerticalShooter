@@ -44,5 +44,17 @@ public class enemyRushMove : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        playerMove play = collision.GetComponent<playerMove>();
+        if (play != null)
+        {
+            //transform.position = -Vector2.MoveTowards(this.transform.position, player.transform.position, 50 * Time.deltaTime);
+            //Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            //rb.AddForce(player.transform.forward * -10000);
+            play.healthAdj(1f);
+        }
+
+    }
 
 }

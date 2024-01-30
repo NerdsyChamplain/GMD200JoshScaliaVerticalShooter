@@ -15,4 +15,19 @@ public class enemBullet : MonoBehaviour
     {
         
     }
+    public void removeBul()
+    {
+        Destroy(gameObject);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
+        playerMove player = collision.GetComponent<playerMove>();
+        if (player != null)
+        {
+            player.healthAdj(1f);
+        }
+    }
+
+    
 }

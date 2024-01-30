@@ -33,6 +33,16 @@ public class bullet : MonoBehaviour
         {
             rushEnem.takeHit(damage);
         }
+        enemBullet enemyBul = collision.GetComponent<enemBullet>();
+        if(enemyBul != null) //&& enemyBul.tag == "enemBul")
+        {
+            enemyBul.removeBul();
+        }
+        enemyShoot shotEnem = collision.GetComponent<enemyShoot>();
+        if(shotEnem != null)
+        {
+            shotEnem.takeHit(damage);
+        }
 
     }
 
