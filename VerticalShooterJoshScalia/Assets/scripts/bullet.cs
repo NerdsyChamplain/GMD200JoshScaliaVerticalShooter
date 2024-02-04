@@ -24,26 +24,27 @@ public class bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject explode = Instantiate(destroyEffect, transform.position, transform.rotation);
-        Destroy(gameObject);        
-        enemyRushMove rushEnem = collision.GetComponent<enemyRushMove>();
-        if(rushEnem != null)
+        if(collision.tag != "enemSpawn")
         {
-            //implement checking hp in order to add score once that is a feature
-            rushEnem.takeHit(damage);
+            GameObject explode = Instantiate(destroyEffect, transform.position, transform.rotation);
+            Destroy(gameObject);        
+            enemyRushMove rushEnem = collision.GetComponent<enemyRushMove>();
+            if(rushEnem != null)
+            {
+                //implement checking hp in order to add score once that is a feature
+                rushEnem.takeHit(damage);
+            }
+            enemBullet enemyBul = collision.GetComponent<enemBullet>();
+            if(enemyBul != null) //&& enemyBul.tag == "enemBul")
+            {
+                enemyBul.removeBul();
+            }
+            enemyShoot shotEnem = collision.GetComponent<enemyShoot>();
+            if(shotEnem != null)
+            {
+                shotEnem.takeHit(damage);
+            }
         }
-        enemBullet enemyBul = collision.GetComponent<enemBullet>();
-        if(enemyBul != null) //&& enemyBul.tag == "enemBul")
-        {
-            enemyBul.removeBul();
-        }
-        enemyShoot shotEnem = collision.GetComponent<enemyShoot>();
-        if(shotEnem != null)
-        {
-            shotEnem.takeHit(damage);
-        }
-        
-
     }
 
 }
