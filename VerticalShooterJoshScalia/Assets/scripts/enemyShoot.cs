@@ -30,7 +30,7 @@ public class enemyShoot : MonoBehaviour
         {
             isRun = true;
             canShoot = false;
-            StartCoroutine(bulletDelay(1f));
+            StartCoroutine(bulletDelay(1.5f));
         }
         
 
@@ -57,6 +57,6 @@ public class enemyShoot : MonoBehaviour
         yield return new WaitForSeconds(delay);
         isRun = false;
         canShoot = true;
-        shoot(60);
+        shoot(120);
     }
 }
